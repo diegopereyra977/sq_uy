@@ -154,7 +154,16 @@ require(["jquery","underscore","backbone","marionette","bootstrap"],function($,_
 			"somos": "somos",
 			"contacto": "contacto",
 			"que_ha" : "que_ha"
-	  	}
+	  	},
+		initialize: function() {
+			this.bind('route', this._pageView);
+		},
+ 
+		_pageView: function() {
+  			var path = Backbone.history.getFragment();
+  			ga('send', 'pageview', {page: "/" + path});
+		}
+
 	});
 	Backbone.history.start();
 });
